@@ -9,6 +9,7 @@ function onReady() {
     $('#submitBtn').on('click', addTask)
     $('#toDoTable').on('click', '#completeBtn', completeTask)
     $('#toDoTable').on('click', '#decompleteBtn', decompleteTask)
+    $('#toDoTable').on('click', '#deleteBtn', deleteTask)
 }
 
 function getList() {
@@ -77,6 +78,16 @@ function decompleteTask() {
     })
 }
 
+function deleteTask() {
+    $.ajax({
+        type: "DELETE",
+        url: `/todolist/delete/${$(this).parent().parent().data().id}`
+    }).then((result) => {
+        getList();
+    }).catch((error) => {
+        console.log(`error deleting task`, error);
+    })
+}
 function render(input) {
     $('#toDoTable').empty()
     for (let todo of input) {
@@ -88,6 +99,7 @@ function render(input) {
                 <th>${todo.taskdesc}</th>
                 <th>${todo.complete}</th>
                 <th><button id='completeBtn'>Finish This</button></th>
+                <th><button id='deleteBtn'>Delete</button></th>
             </tr>
             `)
         } else {
@@ -97,6 +109,7 @@ function render(input) {
                 <th>${todo.taskdesc}</th>
                 <th>${todo.complete}</th>
                 <th><button id='decompleteBtn'>Wait I'm not quite done</button></th>
+                <th><button id='deleteBtn'>Delete</button></th>
             </tr>
             `)  
         }

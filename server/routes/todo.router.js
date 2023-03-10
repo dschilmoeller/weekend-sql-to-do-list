@@ -67,5 +67,17 @@ router.put('/uncomplete/:id', (req, res) => {
     })
 })
 
+router.delete('/delete/:id', (req, res) => {
+    const queryText = `DELETE from todolist WHERE id = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
+        console.log(`successfully deleted id ${req.params.id}`);
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log(`error deleting id: ${req.params.id} with error ${error}`);
+        res.sendStatus(500);
+    })
+})
 
 module.exports = router
