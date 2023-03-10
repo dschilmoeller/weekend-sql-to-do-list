@@ -10,7 +10,7 @@ const pool = new pg.Pool({
 
 router.get('/', (req, res) => {
     console.log(`in router.get`);
-    const queryText = `SELECT * FROM "todolist";`;
+    const queryText = `SELECT * FROM "todolist" ORDER BY complete, id;`;
     pool.query(queryText)
     .then((result) => {
         res.send(result.rows);
