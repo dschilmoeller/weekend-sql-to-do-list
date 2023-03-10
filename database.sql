@@ -13,6 +13,9 @@ CREATE TABLE todolist (
 -- insert default values
 INSERT INTO "todolist" ("taskname", "taskdesc", "complete")
 	VALUES ('Wash Dishes', 'load and start dishwasher, clean off cutting board', false), ('Do laundry', 'load and start laundry machine', false);
+INSERT INTO "todolist" ("taskname", "taskdesc", "complete")
+	VALUES ('Wash Dishes', 'load and start dishwasher, clean off cutting board', false), ('Do laundry', 'load and start laundry machine', false);
 	
 
 
+-- order by id or order by complete?
