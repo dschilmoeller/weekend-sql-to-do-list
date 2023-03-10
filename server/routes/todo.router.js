@@ -39,5 +39,33 @@ router.post('/', (req, res) => {
     })
 });
 
+router.put('/complete/:id', (req, res) => {
+    let completeID = req.params.id;
+    const sqlText = `update todolist SET complete = true where id=$1`
+    pool.query(sqlText, [completeID])
+    .then((result) => {
+        console.log('task with id', completeID, 'marked true');
+        res.sendStatus(200)
+    })
+    .catch((error) => {
+        console.log(`error:`, error);
+        res.sendStatus(500)
+    })
+})
+
+router.put('/uncomplete/:id', (req, res) => {
+    let completeID = req.params.id;
+    const sqlText = `update todolist SET complete = false where id=$1`
+    pool.query(sqlText, [completeID])
+    .then((result) => {
+        console.log('task with id', completeID, 'marked false');
+        res.sendStatus(200)
+    })
+    .catch((error) => {
+        console.log(`error:`, error);
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = router

@@ -56,7 +56,7 @@ function completeTask() {
     let idToComplete = $(this).parent().parent().data().id
     $.ajax({
         method: 'PUT',
-        url: `/todolist/${idToComplete}`
+        url: `/todolist/complete/${idToComplete}`
     }).then((response) => {
         getList()
     }).catch((error) => {
@@ -66,6 +66,15 @@ function completeTask() {
 
 function decompleteTask() {
     console.log(`I'm fairly sure decomplete isn't a word.`);
+    let idToUncomplete = $(this).parent().parent().data().id
+    $.ajax({
+        method: 'PUT',
+        url: `/todolist/uncomplete/${idToUncomplete}`
+    }).then((response) => {
+        getList()
+    }).catch((error) => {
+        alert('task not marked uncomplete - PUT error')
+    })
 }
 
 function render(input) {
