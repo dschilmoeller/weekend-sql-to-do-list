@@ -12,6 +12,7 @@ function onReady() {
     $('#listRenderArea').on('click', '#deleteBtn', deleteTask)
 }
 
+
 function getList() {
     console.log('in getlist')
     $.ajax({
@@ -112,7 +113,7 @@ function render(input) {
                 <a href="#" id="completedTask">
                 <h2>${todo.taskname}</h2>
                 <p>${todo.taskdesc}</p>
-                <button id="deleteBtn">XX</button>
+                <button id="deleteBtn">X</button>
                 </a>
             </li>
             `)

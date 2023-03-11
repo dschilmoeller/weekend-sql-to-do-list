@@ -27,6 +27,7 @@ p {
 #siteDescription {
     font-family: 'Lato', sans-serif
 }
+
 ul, li {
     list-style: none;
 }
@@ -64,9 +65,9 @@ ul li button {
 
 #submitBtn {
     color: green;
-    position: absolute;
-    top: 50%;
-    right: 50%;
+    position: relative;
+    top: 5%;
+    left: 10%;
     padding: 1rem;
 }
 
