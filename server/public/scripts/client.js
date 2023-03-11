@@ -12,6 +12,9 @@ function onReady() {
     $('#toDoTable').on('click', '#deleteBtn', deleteTask)
 }
 
+// from sticky guide - making notes editable and storable.
+// things are likely to go off the rails here.
+
 function getList() {
     console.log('in getlist')
     $.ajax({
@@ -89,29 +92,32 @@ function deleteTask() {
     })
 }
 function render(input) {
-    $('#toDoTable').empty()
+    $('#listRenderArea').empty()
     for (let todo of input) {
         console.log('todo is', todo)
         if (todo.complete === false) {
-            $('#toDoTable').append(`
-            <tr data-id='${todo.id}'>
-                <th>${todo.taskname}</th>
-                <th>${todo.taskdesc}</th>
-                <th>${todo.complete}</th>
-                <th><button id='completeBtn'>Finish This</button></th>
-                <th><button id='deleteBtn'>Delete</button></th>
-            </tr>
+            $('#listRenderArea').append(`
+            <li data-id='${todo.id}'>
+                <a href="#">
+                <h2>${todo.taskname}</h2>
+                <p>${todo.taskdesc}</p>
+                </a>
+            </li>
             `)
         } else {
-            $('#toDoTable').append(`
-            <tr data-id='${todo.id}'>
-                <th>${todo.taskname}</th>
-                <th>${todo.taskdesc}</th>
-                <th>${todo.complete}</th>
-                <th><button id='decompleteBtn'>Wait I'm not quite done</button></th>
-                <th><button id='deleteBtn'>Delete</button></th>
-            </tr>
+            $('#listRenderArea').append(`
+            <li data-id='${todo.id}'>
+                <a href="#">
+                <h2>${todo.taskname}</h2>
+                <p>${todo.taskdesc}</p>
+                </a>
+            </li>
             `)  
         }
     }
 }
+
+// <th><button id='completeBtn'>Finish This</button></th>
+//                 <th><button id='deleteBtn'>Delete</button></th>
+// <th><button id='decompleteBtn'>Wait I'm not quite done</button></th>
+//                 <th><button id='deleteBtn'>Delete</button></th>

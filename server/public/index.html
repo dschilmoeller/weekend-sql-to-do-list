@@ -7,6 +7,8 @@
     <script src="vendors/jquery-3.6.3.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
@@ -14,20 +16,20 @@
     <input type="text" id="taskDescIn" value="" placeholder="Task Description">
     <button id="submitBtn">ahoy</button>
     <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Task Description</th>
-                    <th>Task Complete?</th>
-                    <th>Complete Task</th>
-                    <th>Delete Task</th>
-                </tr>
-            </thead>
-            <tbody id="toDoTable">
-            <!-- Tasks Rendered here -->
-            </tbody>
-        </table>
+        <ul id="listRenderArea">
+            <li>
+                <a href="#">
+                    <h2>Sample Title</h2>
+                    <p>sample content</p>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <h2>Sample Title #2</h2>
+                    <p>sample content #2 </p>
+                </a>
+            </li>
+        </ul>
     </div>
 
 </body>
