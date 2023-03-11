@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +12,26 @@
 
     <title>Document</title>
 </head>
+
 <body>
-    <input type="text" id="taskNameIn" value="" placeholder="Task Name">
-    <input type="text" id="taskDescIn" value="" placeholder="Task Description">
-    <button id="submitBtn">ahoy</button>
+    <div id="inputArea">
+        <h1>Task Tracker</h1>
+        <p id="siteDescription">Simply enter your tasks below. Click anywhere on a post it to mark a task complete, and click a completed task again to mark incomplete.</p>
+        <ul>
+            <li>
+                <a>
+                    <h2>Make a new Task!</h2>
+            <label>Task Name:</label><input type="text" id="taskNameIn" value="" placeholder="Task Name">
+            <label>Description:</label><textarea type="text" id="taskDescIn" value="" placeholder="Task Description"></textarea>
+            <button id="submitBtn">Peel this note!</button>
+        </a>
+        </li>
+        </ul>
+    </div>
     <div>
         <ul id="listRenderArea">
             <li>
-                <a href="#">
+                <a href="#" contenteditable="true">
                     <h2>Sample Title</h2>
                     <p>sample content</p>
                 </a>
@@ -33,4 +46,5 @@
     </div>
 
 </body>
+
 </html>

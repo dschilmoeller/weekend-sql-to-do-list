@@ -5,15 +5,12 @@ $(document).ready(onReady)
 function onReady() {
     // startup get&render
     getList()
-    // click listener
+    // click listeners
     $('#submitBtn').on('click', addTask)
-    $('#toDoTable').on('click', '#completeBtn', completeTask)
-    $('#toDoTable').on('click', '#decompleteBtn', decompleteTask)
-    $('#toDoTable').on('click', '#deleteBtn', deleteTask)
+    $('#listRenderArea').on('click', '#incompleteTask', completeTask)
+    $('#listRenderArea').on('click', '#completedTask', decompleteTask)
+    $('#listRenderArea').on('click', '#deleteBtn', deleteTask)
 }
-
-// from sticky guide - making notes editable and storable.
-// things are likely to go off the rails here.
 
 function getList() {
     console.log('in getlist')
@@ -34,22 +31,25 @@ function addTask() {
         taskDesc: $('#taskDescIn').val(),
         complete: false
     }
-    console.log('name', newData.taskName, 'desc', newData.taskDesc, 't/f', newData.complete)
-    console.log('inside addTask')
+    // console.log('name', newData.taskName, 'desc', newData.taskDesc, 't/f', newData.complete)
+    // console.log('inside addTask')
     if (newData.taskName && newData.taskDesc) {
-        $.ajax({
-            type: 'POST',
-            url: '/todolist',
-            data: newData
-        }).then((response) => {
-            console.log('response from server', response);
-            getList()
-            $('#taskNameIn').val(''),
-            $('#taskDescIn').val('')
-        }).catch((error) => {
-            console.log('error in post', error);
-
-        })
+        if (newData.taskDesc.length < 100) {
+            $.ajax({
+                type: 'POST',
+                url: '/todolist',
+                data: newData
+            }).then((response) => {
+                console.log('response from server', response);
+                getList()
+                $('#taskNameIn').val(''),
+                    $('#taskDescIn').val('')
+            }).catch((error) => {
+                console.log('error in post', error);
+            });
+        } else {
+            alert('Come on, your description is too long!')
+        }
     } else {
         alert('Please fill out all required fields')
     }
@@ -57,7 +57,7 @@ function addTask() {
 
 function completeTask() {
     console.log(`inside complete task`);
-    let idToComplete = $(this).parent().parent().data().id
+    let idToComplete = $(this).parent().data().id
     $.ajax({
         method: 'PUT',
         url: `/todolist/complete/${idToComplete}`
@@ -70,7 +70,7 @@ function completeTask() {
 
 function decompleteTask() {
     console.log(`I'm fairly sure decomplete isn't a word.`);
-    let idToUncomplete = $(this).parent().parent().data().id
+    let idToUncomplete = $(this).parent().data().id
     $.ajax({
         method: 'PUT',
         url: `/todolist/uncomplete/${idToUncomplete}`
@@ -91,6 +91,7 @@ function deleteTask() {
         console.log(`error deleting task`, error);
     })
 }
+
 function render(input) {
     $('#listRenderArea').empty()
     for (let todo of input) {
@@ -98,26 +99,23 @@ function render(input) {
         if (todo.complete === false) {
             $('#listRenderArea').append(`
             <li data-id='${todo.id}'>
-                <a href="#">
+                <a href="#" id="incompleteTask">
                 <h2>${todo.taskname}</h2>
                 <p>${todo.taskdesc}</p>
+                <button id="deleteBtn">X</button>
                 </a>
             </li>
             `)
         } else {
             $('#listRenderArea').append(`
             <li data-id='${todo.id}'>
-                <a href="#">
+                <a href="#" id="completedTask">
                 <h2>${todo.taskname}</h2>
                 <p>${todo.taskdesc}</p>
+                <button id="deleteBtn">XX</button>
                 </a>
             </li>
-            `)  
+            `)
         }
     }
 }
-
-// <th><button id='completeBtn'>Finish This</button></th>
-//                 <th><button id='deleteBtn'>Delete</button></th>
-// <th><button id='decompleteBtn'>Wait I'm not quite done</button></th>
-//                 <th><button id='deleteBtn'>Delete</button></th>
